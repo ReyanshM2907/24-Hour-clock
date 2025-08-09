@@ -1,83 +1,25 @@
-let counter = 0, seconds = 0, seconds_ = "0", minutes = 0, minutes_ = "0", hours = 0, hours_ = "0", date;
+let secondsCounter = 0, seconds = 0, minutes = 0, hours = 0, date, offset = 345;
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+// Initializing all the required variables
 
-function updateTime() {
+function updateTimeAndMaybeDate() {
     date = new Date();
-    counter = Math.floor(date.getTime() / 1000) - (0.25*3600);
-    seconds = counter % 60;
-    minutes = Math.floor(counter / 60) % 60;
-    hours = Math.floor(counter / 3600) % 24;
-    {
-        if (seconds <= 9) {
-            seconds_ = "0" + seconds.toString();
-        } else {
-            seconds_ = seconds.toString();
-        }
-        if (minutes <= 9) {
-            minutes_ = "0" + minutes.toString();
-        } else {
-            minutes_ = minutes.toString();
-        }
-        if (hours <= 9) {
-            hours_ = "0" + hours.toString();
-        } else {
-            hours_ = hours.toString();
-        }
-    } // Pad the numbers with leading zeros if necessary 
-    document.getElementById('time').textContent = `${hours_}:${minutes_}:${seconds_}`;
-}
+    secondsCounter = Math.floor(date.getTime() / 1000) - ((offset - 330) * 60);
+    seconds = secondsCounter % 60;
+    minutes = Math.floor(secondsCounter / 60) % 60;
+    hours = Math.floor(secondsCounter / 3600) % 24;
+    document.getElementById('time').textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    if (hours === 0 && minutes === 0 && seconds === 0) {
+        updateDate();
+    }
+} // Updates the time and also updates the date at the right time
 
 function updateDate() {
     date = new Date();
-    let day = date.getDay();
-    let month = date.getMonth();
-    let day_ = "";
-    let month_ = "";
-    {
-        if (day === 0) {
-            day_ = "Sunday";
-        } else if (day === 1) {
-            day_ = "Monday";
-        } else if (day === 2) {
-            day_ = "Tuesday";
-        } else if (day === 3) {
-            day_ = "Wednesday";
-        } else if (day === 4) {
-            day_ = "Thursday";
-        } else if (day === 5) {
-            day_ = "Friday";
-        } else if (day === 6) {
-            day_ = "Saturday";
-        }
-        if (month === 0) {
-            month_ = "January";
-        } else if (month === 1) {
-            month_ = "February";
-        } else if (month === 2) {
-            month_ = "March";
-        } else if (month === 3) {
-            month_ = "April";
-        } else if (month === 4) {
-            month_ = "May";
-        } else if (month === 5) {
-            month_ = "June";
-        } else if (month === 6) {
-            month_ = "July";
-        } else if (month === 7) {
-            month_ = "August";
-        } else if (month === 8) {
-            month_ = "September";
-        } else if (month === 9) {
-            month_ = "October";
-        } else if (month === 10) {
-            month_ = "November";
-        } else if (month === 11) {
-            month_ = "December";
-        }
-    } // Convert to month and day names
-    document.getElementById('date').textContent = `${day_}, ${month_} ${date.getDate()}, ${date.getFullYear()}`
-}
+    document.getElementById('date').textContent = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+} // Updates the date when called
 
 updateDate();
-updateTime();
-setInterval(updateTime, 1000);
-setInterval(updateDate, 1000);
+updateTimeAndMaybeDate();
+setInterval(updateTimeAndMaybeDate, 1000);
