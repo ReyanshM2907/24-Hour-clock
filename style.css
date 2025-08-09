@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#clock {
+    text-align: center;
+}
+
+#time {
+    font-size: 8rem; /* large time */
+    font-weight: bold;
+    color: black;
+    line-height: 1;
+    padding-bottom: 1rem;
+    margin: 0;
+}
+
+#date {
+    font-size: 1.5rem; /* smaller date */
+    font-weight: normal;
+    color: gray;
+    margin-top: 0.5rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
