@@ -1,9 +1,6 @@
 body {
     margin: 0;
     background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -13,7 +10,7 @@ body {
 }
 
 #time {
-    font-size: 8rem; /* large time */
+    font-size: 16.25vh; /* large time */
     font-weight: bold;
     color: black;
     line-height: 1;
@@ -22,7 +19,7 @@ body {
 }
 
 #date {
-    font-size: 1.5rem; /* smaller date */
+    font-size: 3.05vh; /* smaller date */
     font-weight: normal;
     color: gray;
     margin-top: 0.5rem;
